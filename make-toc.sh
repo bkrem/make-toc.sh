@@ -20,7 +20,7 @@ function generateTree {
 function makeToc {
     # Pull out all the header tags
     # then trim the first two lines (i.e. repo name & `## Contents` itself)
-    # then write to `TOC.md`
+    # then write to filename passed as $OUTPUT
     grep -E "^\#+ [A-Za-z]+ ?[A-Za-z]*" $INPUT|tail -n+3 > $OUTPUT
 
     generateTree $OUTPUT
