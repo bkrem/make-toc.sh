@@ -40,12 +40,13 @@ function makeToc {
 
 
 # Are we on a GNU distro?
-# If not is there `gsed` in the PATH?
-# Inform user that we need `gsed` if we find neither, otherwise run the formatting script.
-gsedcheck=$(which gsed)
+# If not is there a `gsed` manual? Otherwise does the `sed` manual reference GNU?
+# Inform user that we need `gsed` if we find none of these, otherwise run the formatting script.
+sedcheck=$(man sed)
+gsedcheck=$(man gsed)
 oscheck=$(uname)
 
-if [[ ! $oscheck =~ .*linux-gnu.*  ]] && [[ ! $gsedcheck =~ .*bin/gsed.*   ]]
+if [[ ! $oscheck =~ .*linux-gnu.*  ]] && [[ ! $gsedcheck =~ .*GNU.*   ]] && [[ ! $sedcheck =~ .*GNU.* ]]
 then
     echo "Oops! Seems like you don't have gsed (GNU sed) installed (ಠ_ಠ)"
     echo "If you're on OSX and use homebrew, try:"
