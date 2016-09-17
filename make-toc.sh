@@ -7,18 +7,23 @@
 INPUT=$1
 OUTPUT=$2
 
+function generateTree {
+    # Turn headers into top-level bullet points
+    sed -i 's/^## /- /' $1
+
+    # Turn subheaders into 2nd level bullet points
+    sed -i 's/^#### /    - /' $1
+}
+
+
 # The ToC generator
-function maketoc {
+function makeToc {
     # Pull out all the header tags
     # then trim the first two lines (i.e. repo name & `## Contents` itself)
     # then write to `TOC.md`
     grep -E "^\#+ [A-Za-z]+ ?[A-Za-z]*" $INPUT|tail -n+3 > $OUTPUT
 
-    # Turn headers into top-level bullet points
-    sed -i 's/^## /- /' $OUTPUT
-
-    # Turn subheaders into 2nd level bullet points
-    sed -i 's/^#### /    - /' $OUTPUT
+    generateTree $OUTPUT
 
     # Turn each point into a markdown link
     sed -i -r "s/(\- )([A-Za-z]+ ?[A-Za-z]*)/\1[\2](#\2)/" $OUTPUT
@@ -48,6 +53,6 @@ then
     echo "Then rerun this script ( ＾▽＾  )っ"
     return 1
 else
-    maketoc
+    makeToc
     return 0
 fi
