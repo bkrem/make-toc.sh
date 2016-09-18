@@ -25,7 +25,13 @@ if [[ $ARGNUM -gt 2  ]]; then
 fi
 
 
+# Detects the top level header type and generates a hierarchical
+# list of bullet points relative to the top level.
+# $1 - A list of markdown headers
 function generateTree {
+    
+    TL=$(grep -E "^\#+ [A-Za-z]+" $1|head -1)
+    echo $TL
     # Turn headers into top-level bullet points
     sed -i 's/^## /- /' $1
 
@@ -39,7 +45,7 @@ function makeToc {
     # Pull out all the header tags
     # then trim the first two lines (i.e. repo name & `## Contents` itself)
     # then write to filename passed as $OUTPUT
-    grep -E "^\#+ [A-Za-z]+ ?[A-Za-z]*" $INPUT|tail -n+$SKIP > $OUTPUT
+    grep -E "^\#+ [A-Za-z]+" $INPUT|tail -n+$SKIP > $OUTPUT
 
     generateTree $OUTPUT
 
