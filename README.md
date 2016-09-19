@@ -17,7 +17,7 @@ brew install gnu-sed --with-default-names
 ```
 To install as `gsed` alongside OSX's default BSD `sed`, simply omit the `--with-default-names` flag.
 
-**Note:** In this case it is recommended you set the following alias for your terminal session or as a permanent fix in your `.bashrc`/`.zshrc` file:
+_Note:_ In this case it is recommended you set the following alias for your terminal session or as a permanent fix in your `.bashrc`/`.zshrc` file:
 ```
 alias sed='gsed'
 ```
