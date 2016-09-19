@@ -20,12 +20,14 @@ for (( i=0; i < ${#cmds[@]}; i++  )); do
 
     # check if the output and ref files differ
     if [[ $(cmp test-output.md "${refs[$i]}") ]]; then
-        echo "Output does not match ref!"
-        echo "REF:"
+        echo "FAIL: Output does not match ref!"
+        echo "EXPECTED:"
         cat ${refs[$i]}
+        echo "ACTUAL:"
+        mv test-output.md test-output-fail.md # rename to signify fail
+        cat test-output-fail.md
         return 1
     fi
 done
 
-# clean up
-rm test-output.md
+rm test-output.md # clean up
