@@ -4,15 +4,32 @@
 A Shell script to automatically generate a Table of Contents from Markdown files.
 
 ## Dependencies
+`sed` (`gnu-sed`) - make-toc depends on the GNU version of `sed`
+
+### Linux
+You should be all good to go :+1:
+
+### OSX
+#### homebrew
+To install `gnu-sed` as `sed` in your PATH:
+```
+brew install gnu-sed --with-default-names
+```
+**Note:** To install as `gsed` alongside OSX's default BSD `sed`, simply omit the `--with-default-names` flag.  
+In this case it is recommended you set the following alias for your terminal session or as a permanent fix in your `.bashrc`/`.zshrc` file:
+```
+alias sed='gsed'
+```
+The script expects the GNU version on the `sed` command, and **will fail if used with the BSD version**. (I'm working on removing this dependency all together).
 
 
 ## Usage
 ```
-. ./make-toc.sh [...opts] <source-file.md> <output-file.md>
+. ./make-toc.sh ...opts <source-file.md> <output-file.md>
 ```
 
 - `<source-file.md>` - The markdown file a ToC should be generated for.
 - `<output-file.md>` - A filename to label the script's output, e.g. `toc.md`.
 
-### [...opts]
-- `-s n`/`--skip n` - Skip `n` amount of headers from the top of the file. For example, to omit the file's title header use `-s 1`
+### ...opts
+- `-s n`/`--skip n` - Skip `n` headers from the top of the file. For example, to omit the file's title header use `. ./make-toc.sh -s 1 ...`.
