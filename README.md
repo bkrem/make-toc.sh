@@ -10,17 +10,23 @@ A Shell script to automatically generate a Table of Contents from Markdown files
 You should be all good to go :+1:
 
 ### OSX
-#### homebrew
+#### Homebrew
 To install `gnu-sed` as `sed` in your PATH:
-```
+```sh
 brew install gnu-sed --with-default-names
 ```
-**Note:** To install as `gsed` alongside OSX's default BSD `sed`, simply omit the `--with-default-names` flag.  
-In this case it is recommended you set the following alias for your terminal session or as a permanent fix in your `.bashrc`/`.zshrc` file:
+To install as `gsed` alongside OSX's default BSD `sed`, simply omit the `--with-default-names` flag.
+
+**Note:** In this case it is recommended you set the following alias for your terminal session or as a permanent fix in your `.bashrc`/`.zshrc` file:
 ```
 alias sed='gsed'
 ```
 The script expects the GNU version on the `sed` command, and **will fail if used with the BSD version**. (I'm working on removing this dependency all together).
+
+#### MacPorts
+```sh
+sudo port install gsed # see Note above
+```
 
 
 ## Usage
