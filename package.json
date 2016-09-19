@@ -1,0 +1,32 @@
+{
+  "name": "make-toc",
+  "version": "1.0.0",
+  "description": "A Shell script to automatically generate Table of Contents from Markdown files",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "cd tests; . ./toc-tests.sh; cd .."
+  },
+  "bin": {
+      "make-toc.sh": ". ./make-toc.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bkrem/make-toc.sh.git"
+  },
+  "keywords": [
+    "markdown",
+    "table",
+    "contents",
+    "shell",
+    "toc",
+    "headers"
+  ],
+  "author": "Ben Kremer <ben.kremer@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bkrem/make-toc.sh/issues"
+  },
+  "homepage": "https://github.com/bkrem/make-toc.sh#readme"
+}
