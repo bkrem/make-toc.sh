@@ -74,14 +74,13 @@ function makeToc {
 # If not is there a `gsed` manual? Otherwise does the `sed` manual reference GNU?
 # Inform user that we need `gsed` if we find none of these, otherwise run the formatting script.
 sedcheck=$(man sed)
-gsedcheck=$(man gsed)
 oscheck=$(uname)
 
-if [[ ! $oscheck =~ .*linux-gnu.*  ]] && [[ ! $gsedcheck =~ .*GNU.*   ]] && [[ ! $sedcheck =~ .*GNU.* ]]
+if [[ ! $oscheck =~ .*linux-gnu.*  ]] && [[ ! $sedcheck =~ .*GNU.* ]]
 then
-    echo "Oops! Seems like you don't have gsed (GNU sed) installed (ಠ_ಠ)"
+    echo "Oops! Seems like you don't have gnu-sed (GNU sed) installed (ಠ_ಠ)"
     echo "If you're on OSX and use homebrew, try:"
-    echo "'brew install gnu-sed'"
+    echo "'brew install gnu-sed --with-default-names'"
     echo "Then rerun this script ( ＾▽＾  )っ"
     return 1
 else
