@@ -71,7 +71,7 @@ function makeToc {
 
 
 # Are we on a GNU distro?
-# If not is there a `gsed` manual? Otherwise does the `sed` manual reference GNU?
+# If not, is this the GNU version of `sed`?
 # Inform user that we need `gsed` if we find none of these, otherwise run the formatting script.
 sedcheck=$(sed --version)
 oscheck=$(uname)
