@@ -4,7 +4,7 @@ cmds=( ". ../make-toc.sh test-source.md test-output.md" ". ../make-toc.sh -s 2 t
 
 refs=( test-simple-ref.md test-skip2-ref.md )
 
-echo $cmds[0]
+echo ${cmds[0]}
 
 # check whether the arrays to be looped are the same length
 if [[ ${#cmds[@]} -ne ${#refs[@]}  ]]; then
@@ -13,7 +13,7 @@ if [[ ${#cmds[@]} -ne ${#refs[@]}  ]]; then
 fi
 
 # loop the tests
-for (( i=1; i <= ${#cmds[@]}; i++  )); do
+for (( i=0; i < ${#cmds[@]}; i++  )); do
     echo "Test cmd: ${cmds[$i]}"
     echo "Test ref: ${refs[$i]}"
     eval "${cmds[$i]}"
