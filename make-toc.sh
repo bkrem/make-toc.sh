@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-# This script generates a tiered Table of Contents from a
+# This script generates a nested Table of Contents from a
 # markdown document's header tags.
 
 
@@ -32,10 +32,10 @@ fi
 function generateTree {
     HEADERS=$1
     # Log the file -> get first line -> isolate the header tag
-    TL=$( cat $HEADERS|head -1|sed -r "s/(#+) (.+)/\1/" ) 
+    TL=$( cat $HEADERS|head -1|sed -r "s/(#+) (.+)/\1/" )
     SIZE=${#TL}
     INDENT="-"
-    
+
     echo "Top level header: ${TL}"
 
     while [ $SIZE -lt 5  ]; do
@@ -43,7 +43,7 @@ function generateTree {
         TL="$TL#"
         INDENT="    $INDENT"
         let SIZE=SIZE+1
-    done 
+    done
 }
 
 
