@@ -38,7 +38,7 @@ function generateTree {
 
     echo "Top level header: ${TL}"
 
-    while [ $SIZE -lt 5  ]; do
+    while [ $SIZE -lt 7  ]; do
         sed -i "s/^$TL /$INDENT /" $HEADERS
         TL="$TL#"
         INDENT="    $INDENT"
