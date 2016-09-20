@@ -57,13 +57,13 @@ function makeToc {
     generateTree $OUTPUT
 
     # Turn each point into a markdown link
-    sed -i -r "s/(\- )([A-Za-z]+ ?[A-Za-z]*)/\1[\2](#\2)/" $OUTPUT
+    sed -i -r "s/(\- )([A-Za-z0-9]+ ?[A-Za-z0-9]*)/\1[\2](#\2)/" $OUTPUT
 
     # Replace spaces in anchor links with hyphens
-    sed -i -r "s/\((#[A-Za-z]+) ([A-Za-z]+)\)$/(\1-\2)/" $OUTPUT
+    sed -i -r "s/\((#[A-Za-z0-9]+) ([A-Za-z0-9]+)\)$/(\1-\2)/" $OUTPUT
 
     # Set all anchor tags to lowercase to link properly
-    sed -i -r 's/(\(#[A-Za-z\-]+\)$)/\L\1/' $OUTPUT
+    sed -i -r 's/(\(#[A-Za-z0-9\-]+\)$)/\L\1/' $OUTPUT
 
     # Log the final result written to $OUTPUT
     cat $OUTPUT
