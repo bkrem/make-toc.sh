@@ -14,20 +14,28 @@ fi
 
 # loop the tests
 for (( i=0; i < ${#cmds[@]}; i++  )); do
+    echo "--------------------------------------------------------"
     echo "Test cmd: ${cmds[$i]}"
     echo "Test ref: ${refs[$i]}"
+    echo "--------------------------------------------------------"
     eval "${cmds[$i]}"
 
     # check if the output and ref files differ
     if [[ $(cmp test-output.md "${refs[$i]}") ]]; then
-        echo "FAIL: Output does not match ref!"
-        echo "EXPECTED:"
+        printf "\nEXPECTED:\n"
         cat ${refs[$i]}
-        echo "ACTUAL:"
+
+        printf "\nACTUAL:\n"
         mv test-output.md test-output-fail.md # rename to signify fail
         cat test-output-fail.md
-        return 1
+
+        printf "*************\n"
+        printf "FAIL: Output does not match ref!\n"
+        printf "*************\n\n"
+    else
+        printf "*************\n"
+        printf "PASS\n"
+        printf "*************\n\n"
+        rm test-output.md # clean up
     fi
 done
-
-rm test-output.md # clean up
