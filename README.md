@@ -31,7 +31,7 @@ sudo port install gsed # see Note above
 
 ## Usage
 ```
-. ./make-toc.sh ...opts <source-file.md> <output-file.md>
+. ./make-toc.sh ...opts source-file.md output-file.md
 ```
 
 - `<source-file.md>` - The markdown file a ToC should be generated for.
