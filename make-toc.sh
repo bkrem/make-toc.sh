@@ -57,22 +57,22 @@ generateTree() {
     echo "Top level header: ${TL}"
 
     # if $DEPTH has been given, only iterate until we reach it
-    if [[ $DEPTH -ne 0 ]]; then
+    if [ $DEPTH -ne 0 ]; then
         DCOUNT=0
         while [ "$DCOUNT" -lt "$DEPTH"  ]; do
             sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
             INDENT="    $INDENT"
-            let SIZE=SIZE+1
-            let DCOUNT=DCOUNT+1
+            SIZE=$((SIZE + 1))
+            DCOUNT=$((DCOUNT + 1))
         done
     # otherwise until the smallest possible header is reached
     else
-        while [[ $SIZE -lt 7 ]]; do
+        while [ $SIZE -lt 7 ]; do
             sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
             INDENT="    $INDENT"
-            let SIZE=SIZE+1
+            SIZE=$((SIZE + 1))
         done
     fi
 }
