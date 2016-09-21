@@ -17,13 +17,13 @@ SKIP=0
 # How deeply the ToC should nest; "0" signifies full depth
 DEPTH=0
 
-if [[ $ARGNUM -lt 2 ]]; then
+if [ $ARGNUM -lt 2 ]; then
     echo "Too few arguments supplied."
     echo "Minimum is: source-file.md output-file.md"
     return 1
 fi
 
-if [[ $ARGNUM -gt 2  ]]; then
+if [ $ARGNUM -gt 2  ]; then
     case "$1" in
         -s|--skip)
             SKIP=$(( $2 + 1 )) # the skip + offset
@@ -35,6 +35,10 @@ if [[ $ARGNUM -gt 2  ]]; then
             INPUT=$3
             OUTPUT=$4
             ;;
+            *)
+            echo "Unrecognised flag; aborting..."
+            return 1
+            ;;
     esac
 fi
 
@@ -42,7 +46,7 @@ fi
 # Detects the top level header type and generates a hierarchical
 # list of bullet points relative to the top level.
 # $1 - A list of markdown headers
-function generateTree {
+generateTree() {
     HEADERS=$1
     # Log the file -> get first line -> isolate the header tag
     TL=$( cat $HEADERS|head -1|sed -r "s/(#+) (.+)/\1/" )
@@ -51,7 +55,7 @@ function generateTree {
 
 
     echo "Top level header: ${TL}"
-    
+
     # if $DEPTH has been given, only iterate until we reach it
     if [[ $DEPTH -ne 0 ]]; then
         DCOUNT=0
@@ -75,7 +79,7 @@ function generateTree {
 
 
 # The ToC generator
-function makeToc {
+makeToc() {
     # Pull out all the header tags
     # then trim the first two lines (i.e. repo name & `## Contents` itself)
     # then write to filename passed as $OUTPUT
@@ -103,7 +107,7 @@ function makeToc {
 sedcheck=$(sed --version)
 oscheck=$(uname)
 
-if [[ ! $oscheck =~ .*linux-gnu.*  ]] && [[ ! $sedcheck =~ .*GNU.* ]]
+if [[ ! $oscheck =~ .*linux-gnu.* ]] && [[ ! $sedcheck =~ .*GNU.* ]]
 then
     echo "Oops! Seems like you don't have gnu-sed (GNU sed) installed (ಠ_ಠ)"
     echo "If you're on OSX and use homebrew, try:"
