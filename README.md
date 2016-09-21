@@ -4,6 +4,23 @@
 
 A Shell script to automatically generate a Table of Contents from Markdown files.
 
+
+## Contents
+- [Dependencies](#dependencies)
+    - [Linux](#linux)
+    - [OSX](#osx)
+        - [Homebrew](#homebrew)
+        - [MacPorts](#macports)
+- [Installation](#installation)
+    - [NPM](#npm)
+    - [Manually](#manually)
+- [Usage](#usage)
+    - [NPM](#npm-1)
+    - [Manually](#manually)
+- [Documentation](#documentation)
+    - [...opts](#opts)
+
+
 ## Dependencies
 `sed` (`gnu-sed`) - make-toc depends on the GNU version of `sed`
 
@@ -51,6 +68,7 @@ make-toc ...opts source-file.md output-file.md
 ```
 . ./make-toc.sh ...opts source-file.md output-file.md
 ```
+
 
 ## Documentation
 - `source-file.md` - The markdown file a ToC should be generated for.
