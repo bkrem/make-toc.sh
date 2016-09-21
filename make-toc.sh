@@ -14,6 +14,8 @@ INPUT=$1
 OUTPUT=$2
 # Amount of headers to skip from top of file; e.g. the file's title
 SKIP=0
+# How deeply the ToC should nest; "0" signifies full depth
+DEPTH=0
 
 if [[ $ARGNUM -lt 2 ]]; then
     echo "Too few arguments supplied."
@@ -25,6 +27,11 @@ if [[ $ARGNUM -gt 2  ]]; then
     case "$1" in
         -s|--skip)
             SKIP=$(( $2 + 1 )) # the skip + offset
+            INPUT=$3
+            OUTPUT=$4
+            ;;
+        -d|--depth)
+            DEPTH=$2
             INPUT=$3
             OUTPUT=$4
             ;;
@@ -42,14 +49,28 @@ function generateTree {
     SIZE=${#TL}
     INDENT="-"
 
-    echo "Top level header: ${TL}"
 
-    while [ $SIZE -lt 7  ]; do
-        sed -i "s/^$TL /$INDENT /" $HEADERS
-        TL="$TL#"
-        INDENT="    $INDENT"
-        let SIZE=SIZE+1
-    done
+    echo "Top level header: ${TL}"
+    
+    # if $DEPTH has been given, only iterate until we reach it
+    if [[ $DEPTH -ne 0 ]]; then
+        DCOUNT=0
+        while [ "$DCOUNT" -lt "$DEPTH"  ]; do
+            sed -i "s/^$TL /$INDENT /" $HEADERS
+            TL="$TL#"
+            INDENT="    $INDENT"
+            let SIZE=SIZE+1
+            let DCOUNT=DCOUNT+1
+        done
+    # otherwise until the smallest possible header is reached
+    else
+        while [[ $SIZE -lt 7 ]]; do
+            sed -i "s/^$TL /$INDENT /" $HEADERS
+            TL="$TL#"
+            INDENT="    $INDENT"
+            let SIZE=SIZE+1
+        done
+    fi
 }
 
 
