@@ -56,7 +56,7 @@ generateTree() {
 
     echo "Top level header: ${TL}"
 
-    # if $DEPTH has been given, only iterate until we reach it
+    # if $DEPTH has been given, only iterate until we reach it...
     if [ $DEPTH -ne 0 ]; then
         DCOUNT=0
         while [ "$DCOUNT" -lt "$DEPTH"  ]; do
@@ -66,8 +66,9 @@ generateTree() {
             SIZE=$((SIZE + 1))
             DCOUNT=$((DCOUNT + 1))
         done
-    # otherwise until the smallest possible header is reached
+        sed -i "/^##*/d" $HEADERS # delete unaffected lines
     else
+        # ...else until the smallest possible header is reached
         while [ $SIZE -lt 7 ]; do
             sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
