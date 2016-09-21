@@ -34,8 +34,8 @@ sudo port install gsed # see Note above
 . ./make-toc.sh ...opts source-file.md output-file.md
 ```
 
-- `<source-file.md>` - The markdown file a ToC should be generated for.
-- `<output-file.md>` - A filename to label the script's output, e.g. `toc.md`.
+- `source-file.md` - The markdown file a ToC should be generated for.
+- `output-file.md` - A filename to label the script's output, e.g. `toc.md`.
 
 ### ...opts
 - `-s n`/`--skip n` - Skip `n` headers from the top of the file. For example, to omit the file's title header use `. ./make-toc.sh -s 1 ...`.
