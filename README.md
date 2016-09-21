@@ -7,20 +7,6 @@ A Shell script to automatically generate a Table of Contents from Markdown files
 
 ## Contents
 - [Dependencies](#dependencies)
-    - [Linux](#linux)
-    - [OSX](#osx)
-        - [Homebrew](#homebrew)
-        - [MacPorts](#macports)
-- [Installation](#installation)
-    - [NPM](#npm)
-    - [Manually](#manually)
-- [Usage](#usage)
-    - [NPM](#npm-1)
-    - [Manually](#manually-1)
-- [Documentation](#documentation)
-    - [...opts](#opts)
-
-- [Dependencies](#dependencies)
     - [sed](#sed)
         - [Linux](#linux)
         - [OSX](#osx)
