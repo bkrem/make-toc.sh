@@ -84,6 +84,5 @@ then
     echo "Then rerun this script ( ＾▽＾  )っ"
     return 1
 else
-    makeToc
-    return 0
+    makeToc 
 fi
