@@ -15,6 +15,12 @@ OUTPUT=$2
 # Amount of headers to skip from top of file; e.g. the file's title
 SKIP=0
 
+if [[ $ARGNUM -lt 2 ]]; then
+    echo "Too few arguments supplied."
+    echo "Minimum is: source-file.md output-file.md"
+    return 1
+fi
+
 if [[ $ARGNUM -gt 2  ]]; then
     case "$1" in
         -s|--skip)
@@ -84,5 +90,5 @@ then
     echo "Then rerun this script ( ＾▽＾  )っ"
     return 1
 else
-    makeToc 
+    makeToc
 fi
