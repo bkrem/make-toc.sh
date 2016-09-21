@@ -29,11 +29,29 @@ sudo port install gsed # see Note above
 ```
 
 
+## Installation
+### NPM (easy way)
+```
+npm install -g make-toc
+```
+
+### Manually
+1. Clone the repo or download as a ZIP and extract it.
+2. Add the markdown file you want to generate a ToC for to the project's folder.
+
+
 ## Usage
+### NPM
+```
+make-toc ...opts source-file.md output-file.md
+```
+
+### Manually
 ```
 . ./make-toc.sh ...opts source-file.md output-file.md
 ```
 
+## Documentation
 - `source-file.md` - The markdown file a ToC should be generated for.
 - `output-file.md` - A filename to label the script's output, e.g. `toc.md`.
 
