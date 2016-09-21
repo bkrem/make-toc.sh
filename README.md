@@ -31,7 +31,7 @@ sudo port install gsed # see Note above
 
 
 ## Installation
-### NPM (easy way)
+### NPM
 ```
 npm install -g make-toc
 ```
