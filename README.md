@@ -16,7 +16,7 @@ A Shell script to automatically generate a Table of Contents from Markdown files
     - [Manually](#manually)
 - [Usage](#usage)
     - [NPM](#npm-1)
-    - [Manually](#manually)
+    - [Manually](#manually-1)
 - [Documentation](#documentation)
     - [...opts](#opts)
 
