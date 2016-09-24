@@ -19,13 +19,13 @@ test-depth3-ref.md
 echo ${cmds[0]}
 
 # check whether the arrays to be looped are the same length
-if [[ ${#cmds[@]} -ne ${#refs[@]}  ]]; then
+if [ ${#cmds[@]} -ne ${#refs[@]}  ]; then
     echo "cmds and refs arrays are different lengths; aborting..."
     return 1
 fi
 
 # loop the tests
-for (( i=0; i < ${#cmds[@]}; i++  )); do
+for (( i=0; i < ${#cmds[@]}; i+1 )); do
     echo "--------------------------------------------------------"
     echo "Test cmd: ${cmds[$i]}"
     echo "Test ref: ${refs[$i]}"
@@ -33,7 +33,7 @@ for (( i=0; i < ${#cmds[@]}; i++  )); do
     eval ". ../make-toc.sh ${cmds[$i]} test-source.md test-output.md"
 
     # check if the output and ref files differ
-    if [[ $(cmp test-output.md "${refs[$i]}") ]]; then
+    if [ $(cmp test-output.md "${refs[$i]}") ]; then
         printf "\nEXPECTED:\n"
         cat ${refs[$i]}
 
