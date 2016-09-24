@@ -3,44 +3,48 @@
 # This script generates a nested Table of Contents from a
 # markdown document's header tags.
 
-
-# The number of CLI args passed
-ARGNUM=$#
-
 # DEFAULTS
 # Input .md file; e.g. README.md
-INPUT=$1
+INPUT=""
 # Output .md file to write to; e.g. TOC.md
-OUTPUT=$2
+OUTPUT=""
 # Amount of headers to skip from top of file; e.g. the file's title
 SKIP=0
 # How deeply the ToC should nest; "0" signifies full depth
 DEPTH=0
 
-if [ $ARGNUM -lt 2 ]; then
-    echo "Too few arguments supplied."
-    echo "Minimum is: source-file.md output-file.md"
-    return 1
-fi
 
-if [ $ARGNUM -gt 2  ]; then
-    case "$1" in
-        -s|--skip)
-            SKIP=$(( $2 + 1 )) # the skip + offset
-            INPUT=$3
-            OUTPUT=$4
-            ;;
-        -d|--depth)
-            DEPTH=$2
-            INPUT=$3
-            OUTPUT=$4
-            ;;
+checkFlags() {
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            -s|--skip)
+                SKIP=$(( $2 + 1 )) # the skip + offset
+                shift # shift past integer value for skip
+                ;;
+            -d|--depth)
+                DEPTH=$2
+                shift # shift past integer value for depth
+                ;;
+            *.md|*.markdown)
+                if [ -z "$INPUT" ]; then
+                    INPUT=$1
+                else
+                    OUTPUT=$1
+                fi
+                ;;
+            -*)
+                echo "Unrecognised flag; aborting..."
+                return 1
+                ;;
             *)
-            echo "Unrecognised flag; aborting..."
-            return 1
-            ;;
-    esac
-fi
+                echo "Unrecognised argument; aborting..."
+                return 1
+                ;;
+
+        esac
+        shift # shift all cmd line args one position left -> next arg is now $1
+    done
+}
 
 
 # Detects the top level header type and generates a hierarchical
@@ -48,11 +52,11 @@ fi
 # $1 - A list of markdown headers
 generateTree() {
     HEADERS=$1
+
     # Log the file -> get first line -> isolate the header tag
     TL=$( cat $HEADERS|head -1|sed -r "s/(#+) (.+)/\1/" )
     SIZE=${#TL}
     INDENT="-"
-
 
     echo "Top level header: ${TL}"
 
@@ -102,19 +106,28 @@ makeToc() {
 }
 
 
+#############################
+# MAIN
+#############################
+
 # Are we on a GNU distro?
 # If not, is this the GNU version of `sed`?
 # Inform user that we need `gsed` if we find none of these, otherwise run the formatting script.
 sedcheck=$(sed --version)
 oscheck=$(uname)
 
-if [[ ! $oscheck =~ .*linux-gnu.* ]] && [[ ! $sedcheck =~ .*GNU.* ]]
-then
+if [[ ! $oscheck =~ .*linux-gnu.* ]] && [[ ! $sedcheck =~ .*GNU.* ]]; then
     echo "Oops! Seems like you don't have gnu-sed (GNU sed) installed (ಠ_ಠ)"
     echo "If you're on OSX and use homebrew, try:"
     echo "'brew install gnu-sed --with-default-names'"
     echo "Then rerun this script ( ＾▽＾  )っ"
     return 1
 else
+    if [ $# -lt 2 ]; then
+        echo "Too few arguments supplied."
+        echo "Minimum is: source-file.md output-file.md"
+        return 1
+    fi
+    checkFlags "$@"
     makeToc
 fi
