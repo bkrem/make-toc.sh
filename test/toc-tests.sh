@@ -6,14 +6,16 @@ cmds=(
 "-d 1" # depth 1
 "-d 2"
 "-d 3"
+"-s 2 -d 2" # multi-flag
 )
 
 refs=(
-test-simple-ref.md
-test-skip2-ref.md
-test-depth1-ref.md
-test-depth2-ref.md
-test-depth3-ref.md
+simple-ref.md
+skip2-ref.md
+depth1-ref.md
+depth2-ref.md
+depth3-ref.md
+multiflag-ref.md
 )
 
 echo ${cmds[0]}
@@ -25,7 +27,7 @@ if [ ${#cmds[@]} -ne ${#refs[@]}  ]; then
 fi
 
 # loop the tests
-for (( i=0; i < ${#cmds[@]}; i+1 )); do
+for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
     echo "--------------------------------------------------------"
     echo "Test cmd: ${cmds[$i]}"
     echo "Test ref: ${refs[$i]}"
