@@ -77,4 +77,21 @@ make-toc ...opts source-file.md output-file.md
 - `output-file.md` - A filename to label the script's output, e.g. `toc.md`.
 
 ### ...opts
-- `-s n`/`--skip n` - Skip `n` headers from the top of the file. For example, to omit the file's title header use `. ./make-toc.sh -s 1 ...`.
+This section outlines flags for the script which may be used individually or in combination.
+
+#### `-s <n>` or `--skip <n>`
+Skips `n` headers from the top of the file.
+
+For example, to omit the file's title header use:
+```
+make-toc -s 1 source.md target.md
+```
+
+#### `-d <n>` or `--depth <n>`
+Sets the maximum depth for the table.
+
+For example, to generate a fairly shallow table of the top-level and second-level headers only, use:
+```
+make-toc -d 2 source.md target.md
+```
+Passing `-d 0` to the script will result in default behaviour, i.e. full depth. 
