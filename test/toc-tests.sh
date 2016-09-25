@@ -1,8 +1,22 @@
 #!/bin/sh
 
-cmds=( ". ../make-toc.sh test-source.md test-output.md" ". ../make-toc.sh -s 2 test-source.md test-output.md" )
+cmds=(
+"" # default
+"-s 2" # skip 2
+"-d 1" # depth 1
+"-d 2"
+"-d 3"
+"-s 2 -d 2" # multi-flag
+)
 
-refs=( test-simple-ref.md test-skip2-ref.md )
+refs=(
+simple-ref.md
+skip2-ref.md
+depth1-ref.md
+depth2-ref.md
+depth3-ref.md
+multiflag-ref.md
+)
 
 echo ${cmds[0]}
 
@@ -13,15 +27,17 @@ if [ ${#cmds[@]} -ne ${#refs[@]}  ]; then
 fi
 
 # loop the tests
-for (( i=0; i < ${#cmds[@]}; i+1 )); do
+for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
     echo "--------------------------------------------------------"
     echo "Test cmd: ${cmds[$i]}"
     echo "Test ref: ${refs[$i]}"
     echo "--------------------------------------------------------"
-    eval "${cmds[$i]}"
+    eval ". ../make-toc.sh ${cmds[$i]} test-source.md test-output.md"
 
     # check if the output and ref files differ
-    if [ $(cmp test-output.md "${refs[$i]}") ]; then
+    DIFF=$(cmp test-output.md ${refs[$i]})
+    if [[ -n $DIFF ]]; then
+        printf "\nDIFF: $DIFF\n"
         printf "\nEXPECTED:\n"
         cat ${refs[$i]}
 

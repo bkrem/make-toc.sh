@@ -1,5 +1,6 @@
 node_modules/*
 
+toc.md
 test/test-output*.md
 
 npm-debug.log
