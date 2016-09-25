@@ -35,7 +35,9 @@ for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
     eval ". ../make-toc.sh ${cmds[$i]} test-source.md test-output.md"
 
     # check if the output and ref files differ
-    if [ $(cmp test-output.md "${refs[$i]}") ]; then
+    DIFF=$(cmp test-output.md ${refs[$i]})
+    if [[ -n $DIFF ]]; then
+        printf "\nDIFF: $DIFF\n"
         printf "\nEXPECTED:\n"
         cat ${refs[$i]}
 
