@@ -98,8 +98,8 @@ makeToc() {
     # Replace spaces in anchor links with hyphens
     sed -i -r "s/\((#.+) (.+)\)$/(\1-\2)/" $OUTPUT
 
-    # Normalise pure monospace anchor links (remove backticks)
-    sed -i -r "s/\(#\`(.+)\`\)$/(#\1)/" $OUTPUT
+    # Normalise monospace anchor links (remove backticks)
+    sed -i -r "s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/" $OUTPUT
 
     # Set all anchor tags to lowercase to link properly
     sed -i -r 's/(\(#.+\)$)/\L\1/' $OUTPUT
