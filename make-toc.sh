@@ -86,7 +86,7 @@ generateTree() {
 # The ToC generator
 makeToc() {
     # Pull out all the header tags
-    # then trim the first two lines (i.e. repo name & `## Contents` itself)
+    # then trim $SKIP lines (e.g. ``-s 2` -> repo name & `## Contents` itself)
     # then write to filename passed as $OUTPUT
     grep -E "^\#+ .+" $INPUT|tail -n+$SKIP > $OUTPUT
 
