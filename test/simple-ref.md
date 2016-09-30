@@ -13,4 +13,4 @@
                 - [B 5](#b-5)
                     - [B 6](#b-6)
 - [`Pure monospace`](#pure-monospace)
-- [Mixed `mono` space](#mixed-mono-space)
+- [Mixed `mono`](#mixed-mono)
