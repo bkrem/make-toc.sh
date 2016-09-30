@@ -1,6 +1,6 @@
 {
   "name": "make-toc",
-  "version": "1.1.5-docs",
+  "version": "1.1.6",
   "description": "A Shell script to automatically generate a Table of Contents from Markdown files.",
   "directories": {
     "test": "test"
