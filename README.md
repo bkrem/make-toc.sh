@@ -87,6 +87,8 @@ For example, to omit the file's title header use:
 make-toc -s 1 source.md target.md
 ```
 
+<br/>
+
 #### `-d <n>` or `--depth <n>`
 Sets the maximum depth for the table.
 
@@ -94,4 +96,4 @@ For example, to generate a fairly shallow table of the top-level and second-leve
 ```
 make-toc -d 2 source.md target.md
 ```
-Passing `-d 0` to the script will result in default behaviour, i.e. full depth. 
+Passing `-d 0` to the script will result in default behaviour, i.e. full depth.
