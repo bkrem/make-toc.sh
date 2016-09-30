@@ -2,3 +2,5 @@
     - [A2](#a2)
 - [B 1](#b-1)
     - [B 2](#b-2)
+- [`Pure monospace`](#pure-monospace)
+- [Mixed `mono` space](#mixed-mono-space)

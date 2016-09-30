@@ -6,3 +6,5 @@
 - [B 1](#b-1)
     - [B 2](#b-2)
         - [B 3](#b-3)
+- [`Pure monospace`](#pure-monospace)
+- [Mixed `mono` space](#mixed-mono-space)
