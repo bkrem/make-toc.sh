@@ -10,5 +10,6 @@
             - [B 4](#b-4)
                 - [B 5](#b-5)
                     - [B 6](#b-6)
+- [Multi word header with multiple words](#multi-word-header-with-multiple-words)
 - [`Pure monospace`](#pure-monospace)
 - [Mixed `mono`](#mixed-mono)

@@ -6,5 +6,6 @@
 - [B 1](#b-1)
     - [B 2](#b-2)
         - [B 3](#b-3)
+- [Multi word header with multiple words](#multi-word-header-with-multiple-words)
 - [`Pure monospace`](#pure-monospace)
 - [Mixed `mono`](#mixed-mono)

@@ -1,5 +1,6 @@
 - [title](#title)
 - [A1](#a1)
 - [B 1](#b-1)
+- [Multi word header with multiple words](#multi-word-header-with-multiple-words)
 - [`Pure monospace`](#pure-monospace)
 - [Mixed `mono`](#mixed-mono)

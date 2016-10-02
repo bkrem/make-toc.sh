@@ -2,5 +2,6 @@
     - [A2](#a2)
 - [B 1](#b-1)
     - [B 2](#b-2)
+- [Multi word header with multiple words](#multi-word-header-with-multiple-words)
 - [`Pure monospace`](#pure-monospace)
 - [Mixed `mono`](#mixed-mono)
