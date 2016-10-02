@@ -7,3 +7,4 @@
 - [Multi word header with multiple words](#multi-word-header-with-multiple-words)
 - [`Pure monospace`](#pure-monospace)
 - [Mixed `mono`](#mixed-mono)
+- [`Mixed` multi `mono`](#mixed-multi-mono)
