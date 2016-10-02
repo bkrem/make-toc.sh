@@ -96,7 +96,7 @@ makeToc() {
     sed -i -r "s/(\- )(.+ ?.*)/\1[\2](#\2)/" $OUTPUT
 
     # Replace spaces in anchor links with hyphens
-    sed -i -r "s/\((#.+) (.+)\)$/(\1-\2)/" $OUTPUT
+    sed -i -r ":a; s/\(#(.+)([ ]+)(.*)\)$/(#\1-\3)/g; ta" $OUTPUT
 
     # Normalise monospace anchor links (remove backticks)
     sed -i -r "s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/" $OUTPUT
