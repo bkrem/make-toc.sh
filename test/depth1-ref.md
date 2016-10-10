@@ -5,3 +5,5 @@
 - [`Pure monospace`](#pure-monospace)
 - [Mixed `mono`](#mixed-mono)
 - [`Mixed` multi `mono`](#mixed-multi-mono)
+- [symbo?l$ !n the h€@der](#symbo?l$-!n-the-h€@der)
+- [symbo?l$ !n the h€@der wit-h hy-phens - in it](#symbo?l$-!n-the-h€@der-wit-h-hy-phens---in-it)
