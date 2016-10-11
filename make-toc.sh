@@ -101,6 +101,9 @@ makeToc() {
     # Normalise monospace anchor links (remove backticks)
     sed -i -r ":a; s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/g; ta" $OUTPUT
 
+    # Replace any special characters (`-&+$,/:;=?@\"#{}|^~[]`\\*()%.!'`) with a dash (`-`)
+    sed -i -r ":a; s/(\(#.*)([&+$,/:;=?@\"#{}|\^~\[\]\`\\*()%.!\'])(.*\))$/\1-\3/g; ta" $OUTPUT # FIXME
+
     # Set all anchor tags to lowercase to link properly
     sed -i -r 's/(\(#.+\)$)/\L\1/' $OUTPUT
 
