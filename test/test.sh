@@ -10,12 +10,12 @@ cmds=(
 )
 
 refs=(
-simple-ref.md
-skip2-ref.md
-depth1-ref.md
-depth2-ref.md
-depth3-ref.md
-multiflag-ref.md
+./test/simple-ref.md
+./test/skip2-ref.md
+./test/depth1-ref.md
+./test/depth2-ref.md
+./test/depth3-ref.md
+./test/multiflag-ref.md
 )
 
 echo ${cmds[0]}
@@ -27,23 +27,24 @@ if [ ${#cmds[@]} -ne ${#refs[@]}  ]; then
 fi
 
 # loop the tests
+cd .. # run from the root dir
 for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
     echo "--------------------------------------------------------"
     echo "Test cmd: ${cmds[$i]}"
     echo "Test ref: ${refs[$i]}"
     echo "--------------------------------------------------------"
-    eval ". ../make-toc.sh ${cmds[$i]} test-source.md test-output.md"
+    eval ". ./make-toc.sh ${cmds[$i]} ./test/test-source.md ./test/test-output.md"
 
     # check if the output and ref files differ
-    DIFF=$(cmp test-output.md ${refs[$i]})
+    DIFF=$(cmp ./test/test-output.md ${refs[$i]})
     if [[ -n $DIFF ]]; then
         printf "\nDIFF: $DIFF\n"
         printf "\nEXPECTED:\n"
         cat ${refs[$i]}
 
         printf "\nACTUAL:\n"
-        mv test-output.md test-output-fail.md # rename to signify fail
-        cat test-output-fail.md
+        mv ./test/test-output.md ./test/test-output-fail.md # rename to signify fail
+        cat ./test/test-output-fail.md
 
         printf "*************\n"
         printf "FAIL: Output does not match ref!\n"
@@ -52,6 +53,8 @@ for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
         printf "*************\n"
         printf "PASS\n"
         printf "*************\n\n"
-        rm test-output.md # clean up
+        rm ./test/test-output.md # clean up
     fi
 done
+
+cd ./test # cd back into test dir on finish
