@@ -1,9 +1,14 @@
 #!/bin/sh
 
-# This script generates a nested Table of Contents from a
-# markdown document's header tags.
+###########################################################
+# This script generates a nested Table of Contents from a #
+# markdown document's header tags.                        #
+###########################################################
+
 
 # DEFAULTS
+# Ensure we use the packaged GNU sed
+_sed=./lib/bin/sed
 # Input .md file; e.g. README.md
 INPUT=""
 # Output .md file to write to; e.g. TOC.md
@@ -12,7 +17,6 @@ OUTPUT=""
 SKIP=0
 # How deeply the ToC should nest; "0" signifies full depth
 DEPTH=0
-
 
 checkFlags() {
     while [ $# -gt 0 ]; do
@@ -54,7 +58,7 @@ generateTree() {
     HEADERS=$1
 
     # Log the file -> get first line -> isolate the header tag
-    TL=$( cat $HEADERS|head -1|sed -r "s/(#+) (.+)/\1/" )
+    TL=$( cat $HEADERS|head -1|$_sed -r "s/(#+) (.+)/\1/" )
     SIZE=${#TL}
     INDENT="-"
 
@@ -64,17 +68,17 @@ generateTree() {
     if [ $DEPTH -ne 0 ]; then
         DCOUNT=0
         while [ "$DCOUNT" -lt "$DEPTH"  ]; do
-            sed -i "s/^$TL /$INDENT /" $HEADERS
+            $_sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
             INDENT="    $INDENT"
             SIZE=$((SIZE + 1))
             DCOUNT=$((DCOUNT + 1))
         done
-        sed -i "/^##*/d" $HEADERS # delete unaffected lines
+        $_sed -i "/^##*/d" $HEADERS # delete unaffected lines
     else
         # ...else until the smallest possible header is reached
         while [ $SIZE -lt 7 ]; do
-            sed -i "s/^$TL /$INDENT /" $HEADERS
+            $_sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
             INDENT="    $INDENT"
             SIZE=$((SIZE + 1))
@@ -84,7 +88,7 @@ generateTree() {
 
 
 # The ToC generator
-makeToc() {
+makeToc() { 
     # Pull out all the header tags
     # then trim $SKIP lines (e.g. ``-s 2` -> repo name & `## Contents` itself)
     # then write to filename passed as $OUTPUT
@@ -93,16 +97,16 @@ makeToc() {
     generateTree $OUTPUT
 
     # Turn each point into a markdown link
-    sed -i -r "s/(\- )(.+ ?.*)/\1[\2](#\2)/" $OUTPUT
+    $_sed -i -r "s/(\- )(.+ ?.*)/\1[\2](#\2)/" $OUTPUT
 
     # Replace spaces in anchor links with hyphens
-    sed -i -r ":a; s/\(#(.+)([ ]+)(.*)\)$/(#\1-\3)/g; ta" $OUTPUT
+    $_sed -i -r ":a; s/\(#(.+)([ ]+)(.*)\)$/(#\1-\3)/g; ta" $OUTPUT
 
     # Normalise monospace anchor links (remove backticks)
-    sed -i -r ":a; s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/g; ta" $OUTPUT
+    $_sed -i -r ":a; s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/g; ta" $OUTPUT
 
     # Set all anchor tags to lowercase to link properly
-    sed -i -r 's/(\(#.+\)$)/\L\1/' $OUTPUT
+    $_sed -i -r 's/(\(#.+\)$)/\L\1/' $OUTPUT
 
     # Log the final result written to $OUTPUT
     cat $OUTPUT
@@ -113,24 +117,12 @@ makeToc() {
 # MAIN
 #############################
 
-# Are we on a GNU distro?
-# If not, is this the GNU version of `sed`?
-# Inform user that we need `gsed` if we find none of these, otherwise run the formatting script.
-sedcheck=$(sed --version)
-oscheck=$(uname)
-
-if [[ ! $oscheck =~ .*linux-gnu.* ]] && [[ ! $sedcheck =~ .*GNU.* ]]; then
-    echo "Oops! Seems like you don't have gnu-sed (GNU sed) installed (ಠ_ಠ)"
-    echo "If you're on OSX and use homebrew, try:"
-    echo "'brew install gnu-sed --with-default-names'"
-    echo "Then rerun this script ( ＾▽＾  )っ"
+if [ $# -lt 2 ]; then
+    echo "Too few arguments supplied."
+    echo "Minimum: source-file.md output-file.md"
     return 1
-else
-    if [ $# -lt 2 ]; then
-        echo "Too few arguments supplied."
-        echo "Minimum is: source-file.md output-file.md"
-        return 1
-    fi
-    checkFlags "$@"
-    makeToc
 fi
+
+checkFlags "$@"
+makeToc
+
