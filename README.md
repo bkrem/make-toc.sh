@@ -6,12 +6,6 @@ A Shell script to automatically generate a Table of Contents from Markdown files
 
 
 ## Contents
-- [Dependencies](#dependencies)
-    - [sed](#sed)
-        - [Linux](#linux)
-        - [OSX](#osx)
-            - [Homebrew](#homebrew)
-            - [MacPorts](#macports)
 - [Installation](#installation)
     - [NPM](#npm)
     - [Manually](#manually)
@@ -20,33 +14,6 @@ A Shell script to automatically generate a Table of Contents from Markdown files
     - [Manually](#manually-1)
 - [Documentation](#documentation)
     - [...opts](#opts)
-
-
-## Dependencies
-### sed
-make-toc depends on the GNU version of `sed` (`gnu-sed`).
-
-#### Linux
-You should be all good to go :+1:
-
-#### OSX
-##### Homebrew
-To install `gnu-sed` as `sed` in your PATH:
-```sh
-brew install gnu-sed --with-default-names
-```
-To install as `gsed` alongside OSX's default BSD `sed`, simply omit the `--with-default-names` flag.
-
-_Note:_ In this case it is recommended you set the following alias for your terminal session or as a permanent fix in your `.bashrc`/`.zshrc` file:
-```
-alias sed='gsed'
-```
-The script expects the GNU version on the `sed` command, and **will fail if used with the BSD version**. (I'm working on removing this dependency all together).
-
-##### MacPorts
-```sh
-sudo port install gsed # see Note above
-```
 
 
 ## Installation
