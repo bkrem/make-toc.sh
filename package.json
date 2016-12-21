@@ -1,12 +1,12 @@
 {
   "name": "make-toc",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Shell script to automatically generate a Table of Contents from Markdown files.",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "cd test; . ./toc-tests.sh; cd .."
+    "test": "cd test; . ./test.sh; cd .."
   },
   "bin": {
       "make-toc": "make-toc.sh"
