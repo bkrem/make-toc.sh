@@ -6,7 +6,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "cd test; . ./toc-tests.sh; cd .."
+    "test": "cd test; . ./test.sh; cd .."
   },
   "bin": {
       "make-toc": "make-toc.sh"
