@@ -38,7 +38,7 @@ for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
     # check if the output and ref files differ
     DIFF=$(cmp ./test/test-output.md ${refs[$i]})
     if [[ -n $DIFF ]]; then
-        printf "\nDIFF: $DIFF\n"
+        printf "\nDIFF: %s\n" "$DIFF"
         printf "\nEXPECTED:\n"
         cat ${refs[$i]}
 
@@ -57,4 +57,4 @@ for (( i=0; i < ${#cmds[@]}; i=i+1 )); do
     fi
 done
 
-cd ./test # cd back into test dir on finish
+cd ./test || exit # cd back into test dir on finish
