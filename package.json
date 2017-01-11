@@ -9,7 +9,8 @@
     "test": "cd test; . ./test.sh; cd .."
   },
   "bin": {
-      "make-toc": "make-toc.sh"
+      "make-toc": "make-toc.sh",
+      "_sed": "./lib/bin/sed"
   },
   "repository": {
     "type": "git",

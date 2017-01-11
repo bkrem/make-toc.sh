@@ -7,8 +7,6 @@
 
 
 # DEFAULTS
-# Ensure we use the packaged GNU sed
-_sed=$(pwd)/lib/bin/sed
 # Input .md file; e.g. README.md
 INPUT=""
 # Output .md file to write to; e.g. TOC.md
@@ -58,7 +56,7 @@ generateTree() {
     HEADERS=$1
 
     # Log the file -> get first line -> isolate the header tag
-    TL=$( cat $HEADERS|head -1|$_sed -r "s/(#+) (.+)/\1/" )
+    TL=$( cat $HEADERS|head -1|_sed -r "s/(#+) (.+)/\1/" )
     SIZE=${#TL}
     INDENT="-"
 
@@ -68,17 +66,17 @@ generateTree() {
     if [ $DEPTH -ne 0 ]; then
         DCOUNT=0
         while [ "$DCOUNT" -lt "$DEPTH"  ]; do
-            $_sed -i "s/^$TL /$INDENT /" $HEADERS
+            _sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
             INDENT="    $INDENT"
             SIZE=$((SIZE + 1))
             DCOUNT=$((DCOUNT + 1))
         done
-        $_sed -i "/^##*/d" $HEADERS # delete unaffected lines
+        _sed -i "/^##*/d" $HEADERS # delete unaffected lines
     else
         # ...else until the smallest possible header is reached
         while [ $SIZE -lt 7 ]; do
-            $_sed -i "s/^$TL /$INDENT /" $HEADERS
+            _sed -i "s/^$TL /$INDENT /" $HEADERS
             TL="$TL#"
             INDENT="    $INDENT"
             SIZE=$((SIZE + 1))
@@ -97,16 +95,16 @@ makeToc() {
     generateTree $OUTPUT
 
     # Turn each point into a markdown link
-    $_sed -i -r "s/(\- )(.+ ?.*)/\1[\2](#\2)/" $OUTPUT
+    _sed -i -r "s/(\- )(.+ ?.*)/\1[\2](#\2)/" $OUTPUT
 
     # Replace spaces in anchor links with hyphens
-    $_sed -i -r ":a; s/\(#(.+)([ ]+)(.*)\)$/(#\1-\3)/g; ta" $OUTPUT
+    _sed -i -r ":a; s/\(#(.+)([ ]+)(.*)\)$/(#\1-\3)/g; ta" $OUTPUT
 
     # Normalise monospace anchor links (remove backticks)
-    $_sed -i -r ":a; s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/g; ta" $OUTPUT
+    _sed -i -r ":a; s/\(#(.*)\`(.*)\`(.*)\)$/(#\1\2\3)/g; ta" $OUTPUT
 
     # Set all anchor tags to lowercase to link properly
-    $_sed -i -r 's/(\(#.+\)$)/\L\1/' $OUTPUT
+    _sed -i -r 's/(\(#.+\)$)/\L\1/' $OUTPUT
 
     # Log the final result written to $OUTPUT
     cat $OUTPUT
