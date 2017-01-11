@@ -8,7 +8,7 @@
 
 # DEFAULTS
 # Ensure we use the packaged GNU sed
-_sed=./lib/bin/sed
+_sed=$(pwd)/lib/bin/sed
 # Input .md file; e.g. README.md
 INPUT=""
 # Output .md file to write to; e.g. TOC.md
